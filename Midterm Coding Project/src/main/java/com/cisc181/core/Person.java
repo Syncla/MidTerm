@@ -2,9 +2,8 @@ package com.cisc181.core;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.cisc181.exceptions.PersonException;
 /*
  * comment
  */
@@ -46,8 +45,14 @@ public abstract class Person implements java.io.Serializable {
 		return DOB;
 	}
 
-	public void setDOB(Date DOB){
-		this.DOB = DOB;
+	public void setDOB(Date DOB) throws PersonException{
+		Date currentDate = new Date();
+		if (DOB.getYear()> currentDate.getYear()-100){
+			this.DOB = DOB;
+		}
+		else {
+			throw new PersonException(this);
+		}
 		
 		
 	}
@@ -60,9 +65,13 @@ public abstract class Person implements java.io.Serializable {
 		return address;
 	}
 
-	public void setPhone(String newPhone_number) {
-		phone_number = newPhone_number;
-	
+	public void setPhone(String newPhone_number) throws PersonException {
+		if (newPhone_number.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}")){
+			phone_number = newPhone_number;
+		}
+		else {
+			throw new PersonException(this);
+		}
 	}
 
 	public String getPhone() {
@@ -89,7 +98,7 @@ public abstract class Person implements java.io.Serializable {
 	 */
 
 	public Person(String FirstName, String MiddleName, String LastName,
-			Date DOB, String Address, String Phone_number, String Email)
+			Date DOB, String Address, String Phone_number, String Email) throws PersonException
 	{
 		this.FirstName = FirstName;
 		this.MiddleName = MiddleName;

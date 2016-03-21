@@ -1,6 +1,8 @@
 package com.cisc181.core;
 import java.util.Date;
 
+import com.cisc181.exceptions.PersonException;
+
 public class Employee extends Person implements java.io.Serializable{
 
     private String office;
@@ -26,10 +28,11 @@ public class Employee extends Person implements java.io.Serializable{
      * @param office
      * @param salary
      * @param hire
+     * @throws PersonException 
      */
     public Employee(String FirstName, String MiddleName, String LastName,Date DOB,
 			String Address, String Phone_number, String Email,
-			String office, double salary, Date hire)
+			String office, double salary, Date hire) throws PersonException
     {
     	super(FirstName, MiddleName, LastName, DOB, Address, Phone_number, Email);
         this.office = office;
