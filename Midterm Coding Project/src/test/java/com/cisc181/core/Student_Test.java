@@ -102,6 +102,43 @@ public class Student_Test {
 		}	
 	}
 	@Test
+	public void testGradeAverage(){
+		double[] expectedAVG={83.5,88.2,90.4,87.1,87.4,88.9};
+		double[] actualAVG={0,0,0,0,0,0};
+		double[][] grades={
+				{97,87,90,78,91,99,86,67,40,100},//AVG=83.5
+				{94,84,93,85,92,98,88,70,78,100},//AVG=88.2
+				{88,88,87,90,93,97,87,84,90,100},//AVG=90.4
+				{95,90,88,88,94,96,90,40,90,100},//AVG=87.1
+				{85,89,97,78,95,95,79,78,78,100},//AVG=87.4
+				{90,91,94,91,96,94,80,77,76,100} //AVG=88.9
+				};
+		int count=0;
+		for (Section sec:section){
+			int index=0;
+			for (Student stu:students){
+				enroll.add(new Enrollment(stu.getStudentID(),sec.getSectionID()));
+				enroll.get(enroll.size()-1).SetGrade(grades[count][index]);
+				index++;
+			}
+			count++;
+		}
+		int index=0;
+		for (Section sec:section){
+			double sum =0;
+			for (Enrollment enr:enroll){
+				if (enr.getSectionID()==sec.getSectionID()){
+					sum+=enr.getGrade();
+				}
+			}
+			actualAVG[index]=sum/10;
+			index++;
+		}
+		for (int i =0;i<6;i++){
+			assertEquals(expectedAVG[i],actualAVG[i],1);
+		}	
+	}
+	@Test
 	public void changeMajor(){
 		students.get(0).setMajor(eMajor.PHYSICS);
 	}
