@@ -37,12 +37,14 @@ public class Staff_Test {
 	}	
 	
 	@Test(expected = PersonException.class)
-	public void testBadPhoneAndDOB() throws PersonException{
+	public void testBadDOB() throws PersonException{
 		//Invalid DOB
-		Staff badStaff1 = new Staff("John", "J", "Doe", new Date(1915,1,1), "Middle of Nowhere", "(555)-555-5555", "jdoe@fakeEmail.com", "MWF 12:00-1:00", 4, 57000, new Date(), eTitle.MR);
+		Staff badStaff1 = new Staff("John", "J", "Doe", new Date(1900,1,1), "Middle of Nowhere", "(555)-555-5555", "jdoe@fakeEmail.com", "MWF 12:00-1:00", 4, 57000, new Date(), eTitle.MR);
+	}
+	@Test(expected = PersonException.class)
+	public void testBadPhone() throws PersonException{
 		//Invalid Phone Number
 		Staff badStaff2 = new Staff("Jane", "J", "Doe", new Date(1960,1,1), "Middle of Nowhere", "(5555)-555-5555", "jdoe@fakeEmail.com", "MWF 12:00-1:00", 4, 57000, new Date(), eTitle.MR);
-		
 	}
 	
 

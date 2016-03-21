@@ -47,7 +47,7 @@ public abstract class Person implements java.io.Serializable {
 
 	public void setDOB(Date DOB) throws PersonException{
 		Date currentDate = new Date();
-		if (DOB.getYear()> currentDate.getYear()-100){
+		if (DOB.getYear()> currentDate.getYear()-100+1900){
 			this.DOB = DOB;
 		}
 		else {
